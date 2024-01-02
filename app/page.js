@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Slider, Rating, List, ListItem } from '@material-tailwind/react'
 
 export function DefaultRating(params) {
@@ -32,39 +32,37 @@ export function Filters(params) {
     onHealthChange,
   } = params
   return (
-    <div className="filters">
-      <div className="">
-        <div className="flex flex-row items-center mt-4">
-          <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">Hunger</h3>
-          <Slider
-            className="flex-col"
-            label="Budget"
-            value={hunger}
-            onChange={(e) => onHungerChange(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-row items-center mt-4">
-          <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">Budget</h3>
-          <Slider
-            className="flex-col"
-            label="Budget"
-            value={budget}
-            onChange={(e) => onBudgetChange(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-row items-center mt-4">
-          <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">Health</h3>
-          <Rating 
-            label="Health rating"
-            value={health}
-            readOnly
-            onChange={(e) => onHealthChange(e)}
-          />
-        </div>
+    <div className="filters mb-10">
+      <div className="flex flex-row items-center mt-4">
+        <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">Hunger</h3>
+        <Slider
+          className="flex-col"
+          label="Budget"
+          value={hunger}
+          onChange={(e) => onHungerChange(e.target.value)}
+        />
       </div>
-      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-10">
+      <div className="flex flex-row items-center mt-4">
+        <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">Budget</h3>
+        <Slider
+          className="flex-col"
+          label="Budget"
+          value={budget}
+          onChange={(e) => onBudgetChange(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-row items-center mt-4">
+        <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">Health</h3>
+        <Rating
+          label="Health rating"
+          value={health}
+          readOnly
+          onChange={(e) => onHealthChange(e)}
+        />
+      </div>
+      {/* <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-10">
         Generate!
-      </button>
+      </button> */}
     </div>
   )
 }
@@ -79,15 +77,6 @@ export function RecipeRow(params) {
       <a href={link}>View</a>
     </>
   )
-}
-
-function calculateSliderScore(recipeValue, userValue) {
-  return recipeValue >= userValue ? recipeValue - userValue : (recipeValue - userValue) * -1
-}
-
-function calculateRatingScore(recipeValue, userValue) {
-  // get the difference between the two values return positive integer multiplied by 10
-  return recipeValue >= userValue ? (recipeValue - userValue)*10 : (recipeValue - userValue) * -10
 }
 
 export function RecipeTable({ recipes, hunger, budget, health }) {
@@ -106,10 +95,7 @@ export function RecipeTable({ recipes, hunger, budget, health }) {
   filteredRecipes.forEach((recipe) => {
     // console.log(recipe)
     rows.push(
-      <ListItem
-        key={recipe.id}
-        className="flex flex-row justify-between px-0"
-      >
+      <ListItem key={recipe.id} className="flex flex-row justify-between px-0">
         <RecipeRow name={recipe.name} link={`/recipes/${recipe.id}`} />
       </ListItem>
     )
@@ -123,15 +109,13 @@ export function RecipeTable({ recipes, hunger, budget, health }) {
 }
 
 export function RecipeFinderTable({ recipes }) {
-  const [filterHunger, setFilterHunger] = useState(10)
+  const [filterHunger, setFilterHunger] = useState(50)
   const [filterBudget, setFilterBudget] = useState(50)
   const [filterHealth, setFilterHealthRating] = useState(3)
-  // console.log('state Values', filterHunger, filterBudget, filterHealth)
+  console.log('state Values', filterHunger, filterBudget, filterHealth)
   return (
-    <main className="flex min-h-screen flex-col justify-between p-24 w-1/2 m-auto">
-      <h1 className="text-4xl font-bold">
-        What to cook tonight?
-      </h1>
+    <main className="flex min-h-screen flex-col p-24 w-1/2 m-auto">
+      <h1 className="text-4xl font-bold mb-10">What to cook?</h1>
       <Filters
         hunger={filterHunger}
         budget={filterBudget}
@@ -150,58 +134,37 @@ export function RecipeFinderTable({ recipes }) {
   )
 }
 
-export default function RecipeFinder() {
-  return <RecipeFinderTable recipes={RECIPES} />
+function calculateSliderScore(recipeValue, userValue) {
+  return recipeValue >= userValue
+    ? recipeValue - userValue
+    : (recipeValue - userValue) * -1
 }
 
-const RECIPES = [
-  {
-    id: 1,
-    name: 'Tacos',
-    hungerRating: 60,
-    budgetRating: 80,
-    healthRating: 3
-  },
-  {
-    id: 2,
-    name: 'Pizza',
-    hungerRating: 50,
-    budgetRating: 30,
-    healthRating: 1,
-  },
-  {
-    id: 3,
-    name: 'Roast Lamb',
-    hungerRating: 80,
-    budgetRating: 60,
-    healthRating: 4,
-  },
-  {
-    id: 4,
-    name: 'Roast Chicken',
-    hungerRating: 70,
-    budgetRating: 90,
-    healthRating: 4,
-  },
-  {
-    id: 5,
-    name: 'Couscous Salad',
-    hungerRating: 50,
-    budgetRating: 60,
-    healthRating: 4,
-  },
-  {
-    id: 6,
-    name: 'Burgers',
-    hungerRating: 70,
-    budgetRating: 30,
-    healthRating: 2,
-  },
-  {
-    id: 7,
-    name: 'Lasagne',
-    hungerRating: 60,
-    budgetRating: 30,
-    healthRating: 2,
-  },
-]
+function calculateRatingScore(recipeValue, userValue) {
+  // get the difference between the two values return positive integer multiplied by 10
+  return recipeValue >= userValue
+    ? (recipeValue - userValue) * 20
+    : (recipeValue - userValue) * -20
+}
+
+export default function RecipeFinder() {
+  const [recipes, setRecipes] = useState([])
+
+  useEffect(() => {
+    const fetchAllRecipes = async () => {
+      const res = await fetch('api/recipes', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const { recipes } = await res.json()
+      setRecipes(recipes)
+    }
+    fetchAllRecipes()
+  }, [])
+
+  return (
+      <RecipeFinderTable recipes={recipes}/>
+  )
+}
