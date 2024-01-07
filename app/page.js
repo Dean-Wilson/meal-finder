@@ -2,25 +2,25 @@
 import { useState, useEffect } from 'react'
 import { Slider, Rating, List, ListItem } from '@material-tailwind/react'
 
-export function DefaultRating(params) {
-  const { label } = params
-  return (
-    <div className="flex flex-row items-center mt-4">
-      <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">{label}</h3>
-      <Rating value={4} />
-    </div>
-  )
-}
+// export function DefaultRating(params) {
+//   const { label } = params
+//   return (
+//     <div className="flex flex-row items-center mt-4">
+//       <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">{label}</h3>
+//       <Rating value={4} />
+//     </div>
+//   )
+// }
 
-export function DefaultSlider(params) {
-  const { label, value } = params
-  return (
-    <div className="flex flex-row items-center mt-4">
-      <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">{label}</h3>
-      <Slider className="flex-col" value={value} />
-    </div>
-  )
-}
+// export function DefaultSlider(params) {
+//   const { label, value } = params
+//   return (
+//     <div className="flex flex-row items-center mt-4">
+//       <h3 className="flex-col w-44 grow-0 shrink-0 mr-5">{label}</h3>
+//       <Slider className="flex-col" value={value} />
+//     </div>
+//   )
+// }
 
 export function Filters(params) {
   const {
@@ -134,19 +134,6 @@ export function RecipeFinderTable({ recipes }) {
   )
 }
 
-function calculateSliderScore(recipeValue, userValue) {
-  return recipeValue >= userValue
-    ? recipeValue - userValue
-    : (recipeValue - userValue) * -1
-}
-
-function calculateRatingScore(recipeValue, userValue) {
-  // get the difference between the two values return positive integer multiplied by 10
-  return recipeValue >= userValue
-    ? (recipeValue - userValue) * 20
-    : (recipeValue - userValue) * -20
-}
-
 export default function RecipeFinder() {
   const [recipes, setRecipes] = useState([])
 
@@ -164,7 +151,18 @@ export default function RecipeFinder() {
     fetchAllRecipes()
   }, [])
 
-  return (
-      <RecipeFinderTable recipes={recipes}/>
-  )
+  return <RecipeFinderTable recipes={recipes} />
+}
+
+function calculateSliderScore(recipeValue, userValue) {
+  return recipeValue >= userValue
+    ? recipeValue - userValue
+    : (recipeValue - userValue) * -1
+}
+
+function calculateRatingScore(recipeValue, userValue) {
+  // get the difference between the two values return positive integer multiplied by 20
+  return recipeValue >= userValue
+    ? (recipeValue - userValue) * 20
+    : (recipeValue - userValue) * -20
 }
