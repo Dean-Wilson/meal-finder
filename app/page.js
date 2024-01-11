@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Slider, Rating, List, ListItem } from '@material-tailwind/react'
+import Link from 'next/link'
+import { Slider, Rating, List, ListItem, Button } from '@material-tailwind/react'
 
 // export function DefaultRating(params) {
 //   const { label } = params
@@ -60,9 +61,6 @@ export function Filters(params) {
           onChange={(e) => onHealthChange(e)}
         />
       </div>
-      {/* <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-10">
-        Generate!
-      </button> */}
     </div>
   )
 }
@@ -71,10 +69,10 @@ export function RecipeRow(params) {
   const { name, link } = params
   return (
     <>
-      <div className="flex flex-col">
+      <a className="flex w-full justify-between items-center" href={link}>
         <h3 className="text-lg">{name}</h3>
-      </div>
-      <a href={link}>View</a>
+        <span>View</span>
+      </a>
     </>
   )
 }
@@ -95,7 +93,7 @@ export function RecipeTable({ recipes, hunger, budget, health }) {
   filteredRecipes.forEach((recipe) => {
     // console.log(recipe)
     rows.push(
-      <ListItem key={recipe.id} className="flex flex-row justify-between px-0">
+      <ListItem key={recipe.id} className="flex flex-row justify-between px-4 py-3 mt-2 text-white bg-blue-gray-700 hover:bg-blue-500 hover:text-white">
         <RecipeRow name={recipe.name} link={`/recipes/${recipe.id}`} />
       </ListItem>
     )
@@ -112,9 +110,9 @@ export function RecipeFinderTable({ recipes }) {
   const [filterHunger, setFilterHunger] = useState(50)
   const [filterBudget, setFilterBudget] = useState(50)
   const [filterHealth, setFilterHealthRating] = useState(3)
-  console.log('state Values', filterHunger, filterBudget, filterHealth)
+  // console.log('state Values', filterHunger, filterBudget, filterHealth)
   return (
-    <main className="flex min-h-screen flex-col p-24 w-1/2 m-auto">
+    <>
       <h1 className="text-4xl font-bold mb-10">What to cook?</h1>
       <Filters
         hunger={filterHunger}
@@ -130,7 +128,7 @@ export function RecipeFinderTable({ recipes }) {
         budget={filterBudget}
         health={filterHealth}
       />
-    </main>
+    </>
   )
 }
 

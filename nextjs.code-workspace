@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../nextjs-tutorial-huxn"
+		},
+		{
+			"path": "../peek-next-test"
+		},
+		{
+			"path": "../reactjs-tic-tac-toe"
+		}
+	],
+	"settings": {}
+}

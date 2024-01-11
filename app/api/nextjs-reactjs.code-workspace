@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../nextjs-tutorial-huxn"
+		},
+		{
+			"path": "../../../reactjs-tic-tac-toe"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}
