@@ -1,10 +1,13 @@
 'use client'
 
 import React from 'react'
+import {
+  Typography
+} from "@material-tailwind/react";
 
 const Recipe = ( {params} ) => {
   return (
-    <div>Recipe {params.id}</div>
+    <Typography variant="h1">Recipe {params.id}</Typography>
   )
 }
 

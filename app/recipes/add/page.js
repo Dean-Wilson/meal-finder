@@ -1,9 +1,17 @@
+'use client';
+
 import React from 'react'
 import AddRecipe from '../../components/add-recipe'
+import {
+  Typography
+} from "@material-tailwind/react";
 
 const addRecipe = () => {
   return (
-    <AddRecipe />
+    <>
+      <Typography variant="h1">Add Recipe</Typography>
+      <AddRecipe />
+    </>
   )
 }
 

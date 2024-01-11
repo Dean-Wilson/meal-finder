@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Slider, Rating, List, ListItem, Button } from '@material-tailwind/react'
+import { Slider, Rating, List, ListItem, Button, Typography } from '@material-tailwind/react'
 
 // export function DefaultRating(params) {
 //   const { label } = params
@@ -71,7 +71,7 @@ export function RecipeRow(params) {
     <>
       <a className="flex w-full justify-between items-center" href={link}>
         <h3 className="text-lg">{name}</h3>
-        <span>View</span>
+        <span className="text-lg">View</span>
       </a>
     </>
   )
@@ -113,7 +113,7 @@ export function RecipeFinderTable({ recipes }) {
   // console.log('state Values', filterHunger, filterBudget, filterHealth)
   return (
     <>
-      <h1 className="text-4xl font-bold mb-10">What to cook?</h1>
+      <Typography variant="h1">What to cook?</Typography>
       <Filters
         hunger={filterHunger}
         budget={filterBudget}
@@ -159,7 +159,13 @@ function calculateSliderScore(recipeValue, userValue) {
 }
 
 function calculateRatingScore(recipeValue, userValue) {
-  // get the difference between the two values return positive integer multiplied by 20
+  // never show a recipe with a health rating difference of 3 or more
+  const difference = Math.abs(recipeValue - userValue);
+  if (difference >= 3) {
+    return 1000;
+  }
+
+  // get the difference between the two values return positive integer multiplied by 20 to match slider score scale
   return recipeValue >= userValue
     ? (recipeValue - userValue) * 20
     : (recipeValue - userValue) * -20

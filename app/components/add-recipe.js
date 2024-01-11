@@ -17,13 +17,6 @@ const AddRecipe = () => {
 
     const  addRecipeHandler = async () => {
 
-        console.log(
-            recipeName,
-            hungerRating,
-            budgetRating,
-            healthRating
-        )
-
         const response = await fetch('/api/recipes', {
             method: 'POST',
             body: JSON.stringify({
@@ -44,7 +37,6 @@ const AddRecipe = () => {
 
     return (
         <div className="mt-10">
-            <h1>Add Recipe</h1>
             <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                 <div className="mb-1 flex flex-col gap-6">
                 <label>Recipe Name</label>

@@ -13,10 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>
+        <header className="shadow-md bg-gradient-to-tr text-white mx-auto from-blue-gray-900 to-blue-gray-800">
           <NavbarDefault />
         </header>
-        <main className="flex min-h-screen flex-col p-24 w-1/2 m-auto">
+        <main className="flex min-h-screen flex-col p-24 w-3/4 max-w-screen-xl m-auto">
           {children}
         </main>
       </body>

@@ -29,10 +29,10 @@ export const recipes = [
   },
   {
     "id": 5,
-    "name": "Israeli Couscous Salad",
-    "hungerRating": 50,
+    "name": "Salad",
+    "hungerRating": 20,
     "budgetRating": 60,
-    "healthRating": 4
+    "healthRating": 5
   },
   {
     "id": 6,

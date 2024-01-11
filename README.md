@@ -36,11 +36,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Roadmap
-- move recipe add to its own page and link from home page  [/]
-- fix top 3 recipes on home page to be buttons [/]
+- On recipe page get recipe name and display if recipe exists, 404 if not []
 - Switch to 'meals' instead of recipes as this won't have the actual recipes in it []
 - add recipe edit page []
-- form validation (handle response on frontend) []
+- add recipe form validation (handle response on frontend) []
 - use a different layout on an individual recipe []
 - animation for meal finding []
 - deploy to vercel []
