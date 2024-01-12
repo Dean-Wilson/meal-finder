@@ -10,8 +10,8 @@ const meal = ({ params }) => {
   useEffect(() => {
     const id = params.id
     const fetchMeal = async () => {
-      const res = await fetch(`/api/meals/${id}`, {
-      // const res = await fetch('/api/meals/id?id='+ id, {
+      // const res = await fetch(`/api/meals/${id}`, {
+      const res = await fetch(`/api/meals/id?id=${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

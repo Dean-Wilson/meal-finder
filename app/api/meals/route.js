@@ -4,6 +4,7 @@ import fs from 'fs'
 
 // async function to get all meals
 export async function GET() {
+  console.log('get all meals')
   const allMeals = await meals.sort()
   return NextResponse.json({
     meals: allMeals,
