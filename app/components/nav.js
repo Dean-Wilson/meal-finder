@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react'
 import {
   Navbar,
-  MobileNav,
+  Collapse,
   Typography,
-  Button,
   IconButton,
 } from '@material-tailwind/react'
 import Link from 'next/link'
@@ -121,11 +120,11 @@ const NavbarDefault = () => {
           )}
         </IconButton>
       </div>
-      <MobileNav open={openNav}>
+      <Collapse open={openNav}>
         <div className="container">
           {navList}
         </div>
-      </MobileNav>
+      </Collapse>
       
     </Navbar>
   )

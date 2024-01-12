@@ -36,12 +36,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Roadmap
-- Handle submit of adding a meal []
 - On meal page get meal name and display if meal exists, 404 if not []
-- Switch to 'meals' instead of meals as this won't have the actual meals in it []
+- Add randomiser - if want more random results, don't care so much []
 - add meal edit page []
-- add meal form validation (handle response on frontend) []
 - use a different layout on an individual meal []
 - animation for meal finding []
 - deploy to vercel []
-- Ggjx5FpmhRWSHrhJSQkAnKKjrGK6VnWtYZsgH86NHYM

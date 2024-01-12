@@ -1,38 +1,38 @@
-import meals from '../db'
+import meals from '@/api/db'
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 
 // async function to get all meals
 export async function GET() {
-  const allRecipes = await meals.sort()
+  const allMeals = await meals.sort()
   return NextResponse.json({
-    meals: allRecipes,
+    meals: allMeals,
     ok: true,
   })
 }
 
 export async function POST(req, res) {
-  const { recipeName, hungerRating, budgetRating, healthRating } =
+  const { mealName, hungerRating, budgetRating, healthRating } =
     await req.json()
 
-  if (!recipeName || !hungerRating || !budgetRating || !healthRating) {
+  if (!mealName || !hungerRating || !budgetRating || !healthRating) {
     return NextResponse.json({
       ok: false,
       error: 'Missing fields',
     })
   }
 
-  const newRecipe = {
+  const newmeal = {
     id: meals.length + 1,
-    name: recipeName,
+    name: mealName,
     hungerRating,
     budgetRating,
     healthRating,
   }
 
-  meals.push(newRecipe)
-  const updatedRecipes = meals
-  const updatedData = JSON.stringify(updatedRecipes, null, 2)
+  meals.push(newmeal)
+  const updatedMeals = meals
+  const updatedData = JSON.stringify(updatedMeals, null, 2)
 
   try {
     fs.writeFileSync(
@@ -49,7 +49,7 @@ export async function POST(req, res) {
   }
 
   return NextResponse.json({
-    meal: newRecipe,
+    meal: newmeal,
     ok: true,
   })
 }

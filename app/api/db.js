@@ -69,4 +69,6 @@ export const meals = [
     "budgetRating": "0",
     "healthRating": 5
   }
-]; export default meals;
+]; 
+
+export default meals;

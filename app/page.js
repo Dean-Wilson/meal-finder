@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { Slider, Rating, List, ListItem, Button, Typography } from '@material-tailwind/react'
 
 // export function DefaultRating(params) {
@@ -65,7 +64,7 @@ export function Filters(params) {
   )
 }
 
-export function RecipeRow(params) {
+export function MealRow(params) {
   const { name, link } = params
   return (
     <>
@@ -77,7 +76,7 @@ export function RecipeRow(params) {
   )
 }
 
-export function RecipeTable({ meals, hunger, budget, health }) {
+export function MealTable({ meals, hunger, budget, health }) {
   const rows = []
 
   meals.forEach((meal) => {
@@ -88,13 +87,13 @@ export function RecipeTable({ meals, hunger, budget, health }) {
   })
 
   // sort meals by score, lowest to highest AND limit to 3
-  const filteredRecipes = meals.sort((a, b) => a.score - b.score).slice(0, 3)
+  const filteredMeals = meals.sort((a, b) => a.score - b.score).slice(0, 3)
 
-  filteredRecipes.forEach((meal) => {
+  filteredMeals.forEach((meal) => {
     // console.log(meal)
     rows.push(
       <ListItem key={meal.id} className="flex flex-row justify-between px-4 py-3 mt-2 text-white bg-blue-gray-700 hover:bg-blue-500 hover:text-white">
-        <RecipeRow name={meal.name} link={`/meals/${meal.id}`} />
+        <MealRow name={meal.name} link={`/meals/${meal.id}`} />
       </ListItem>
     )
   })
@@ -106,7 +105,7 @@ export function RecipeTable({ meals, hunger, budget, health }) {
   )
 }
 
-export function RecipeFinderTable({ meals }) {
+export function MealFinderTable({ meals }) {
   const [filterHunger, setFilterHunger] = useState(50)
   const [filterBudget, setFilterBudget] = useState(50)
   const [filterHealth, setFilterHealthRating] = useState(3)
@@ -122,7 +121,7 @@ export function RecipeFinderTable({ meals }) {
         onBudgetChange={setFilterBudget}
         onHealthChange={setFilterHealthRating}
       />
-      <RecipeTable
+      <MealTable
         meals={meals}
         hunger={filterHunger}
         budget={filterBudget}
@@ -132,41 +131,41 @@ export function RecipeFinderTable({ meals }) {
   )
 }
 
-export default function RecipeFinder() {
-  const [meals, setRecipes] = useState([])
+export default function MealFinder() {
+  const [meals, setMeals] = useState([])
 
   useEffect(() => {
-    const fetchAllRecipes = async () => {
-      const res = await fetch('api/meals', {
+    const fetchAllMeals = async () => {
+      const res = await fetch('/api/meals', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       })
       const { meals } = await res.json()
-      setRecipes(meals)
+      setMeals(meals)
     }
-    fetchAllRecipes()
+    fetchAllMeals()
   }, [])
 
-  return <RecipeFinderTable meals={meals} />
+  return <MealFinderTable meals={meals} />
 }
 
-function calculateSliderScore(recipeValue, userValue) {
-  return recipeValue >= userValue
-    ? recipeValue - userValue
-    : (recipeValue - userValue) * -1
+function calculateSliderScore(mealValue, userValue) {
+  return mealValue >= userValue
+    ? mealValue - userValue
+    : (mealValue - userValue) * -1
 }
 
-function calculateRatingScore(recipeValue, userValue) {
+function calculateRatingScore(mealValue, userValue) {
   // never show a meal with a health rating difference of 3 or more
-  const difference = Math.abs(recipeValue - userValue);
+  const difference = Math.abs(mealValue - userValue);
   if (difference >= 3) {
     return 1000;
   }
 
   // get the difference between the two values return positive integer multiplied by 20 to match slider score scale
-  return recipeValue >= userValue
-    ? (recipeValue - userValue) * 20
-    : (recipeValue - userValue) * -20
+  return mealValue >= userValue
+    ? (mealValue - userValue) * 20
+    : (mealValue - userValue) * -20
 }
