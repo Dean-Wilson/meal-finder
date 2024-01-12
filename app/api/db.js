@@ -1,4 +1,4 @@
-export const recipes = [
+export const meals = [
   {
     "id": 1,
     "name": "Tacos",
@@ -47,5 +47,26 @@ export const recipes = [
     "hungerRating": 60,
     "budgetRating": 30,
     "healthRating": 2
+  },
+  {
+    "id": 8,
+    "name": "Trash",
+    "hungerRating": "100",
+    "budgetRating": "0",
+    "healthRating": 1
+  },
+  {
+    "id": 9,
+    "name": "Trash",
+    "hungerRating": "50",
+    "budgetRating": "50",
+    "healthRating": "1"
+  },
+  {
+    "id": 10,
+    "name": "Tester",
+    "hungerRating": "100",
+    "budgetRating": "0",
+    "healthRating": 5
   }
-]; export default recipes;
+]; export default meals;

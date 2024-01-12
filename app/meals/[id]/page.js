@@ -5,10 +5,10 @@ import {
   Typography
 } from "@material-tailwind/react";
 
-const Recipe = ( {params} ) => {
+const meal = ( {params} ) => {
   return (
-    <Typography variant="h1">Recipe {params.id}</Typography>
+    <Typography variant="h1">meal {params.id}</Typography>
   )
 }
 
-export default Recipe
+export default meal

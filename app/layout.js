@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <header className="shadow-md bg-gradient-to-tr text-white mx-auto from-blue-gray-900 to-blue-gray-800">
           <NavbarDefault />
         </header>
-        <main className="flex min-h-screen flex-col p-24 w-3/4 max-w-screen-xl m-auto">
+        <main className="flex min-h-screen flex-col py-24 px-4 w-3/4 max-w-screen-md m-auto">
           {children}
         </main>
       </body>

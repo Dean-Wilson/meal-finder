@@ -42,7 +42,7 @@ const NavbarDefault = () => {
             fill="#90A4AE"
           />
         </svg>
-        <Link href="/">Cook</Link>
+        <Link href="/">Eat</Link>
       </Typography>
       <Typography
         as="li"
@@ -62,7 +62,7 @@ const NavbarDefault = () => {
             fill="#90A4AE"
           />
         </svg>
-        <Link href="/recipes/add" className="flex items-center">Add Recipe</Link>
+        <Link href="/meals/add" className="flex items-center">Add meal</Link>
       </Typography>
     </ul>
   )
@@ -71,7 +71,7 @@ const NavbarDefault = () => {
     <Navbar
       variant="gradient"
       color="blue-gray"
-      className="mx-auto max-w-screen-xl from-blue-gray-900 to-blue-gray-800 px-4 py-3 rounded-none"
+      className="mx-auto max-w-screen-md from-blue-gray-900 to-blue-gray-800 px-4 py-3 rounded-none"
     >
       <div className="flex flex-wrap items-center justify-between gap-y-4 text-white">
         <Typography

@@ -77,43 +77,43 @@ export function RecipeRow(params) {
   )
 }
 
-export function RecipeTable({ recipes, hunger, budget, health }) {
+export function RecipeTable({ meals, hunger, budget, health }) {
   const rows = []
 
-  recipes.forEach((recipe) => {
-    const hungerScore = calculateSliderScore(recipe.hungerRating, hunger)
-    const budgetScore = calculateSliderScore(recipe.budgetRating, budget)
-    const healthScore = calculateRatingScore(recipe.healthRating, health)
-    recipe.score = hungerScore + budgetScore + healthScore
+  meals.forEach((meal) => {
+    const hungerScore = calculateSliderScore(meal.hungerRating, hunger)
+    const budgetScore = calculateSliderScore(meal.budgetRating, budget)
+    const healthScore = calculateRatingScore(meal.healthRating, health)
+    meal.score = hungerScore + budgetScore + healthScore
   })
 
-  // sort recipes by score, lowest to highest AND limit to 3
-  const filteredRecipes = recipes.sort((a, b) => a.score - b.score).slice(0, 3)
+  // sort meals by score, lowest to highest AND limit to 3
+  const filteredRecipes = meals.sort((a, b) => a.score - b.score).slice(0, 3)
 
-  filteredRecipes.forEach((recipe) => {
-    // console.log(recipe)
+  filteredRecipes.forEach((meal) => {
+    // console.log(meal)
     rows.push(
-      <ListItem key={recipe.id} className="flex flex-row justify-between px-4 py-3 mt-2 text-white bg-blue-gray-700 hover:bg-blue-500 hover:text-white">
-        <RecipeRow name={recipe.name} link={`/recipes/${recipe.id}`} />
+      <ListItem key={meal.id} className="flex flex-row justify-between px-4 py-3 mt-2 text-white bg-blue-gray-700 hover:bg-blue-500 hover:text-white">
+        <RecipeRow name={meal.name} link={`/meals/${meal.id}`} />
       </ListItem>
     )
   })
   return (
-    <div className="recipe-table mt-10">
-      <h2>Top 3 Recipes</h2>
+    <div className="meal-table mt-10">
+      <h2>Top 3 meals</h2>
       <List className="px-0">{rows}</List>
     </div>
   )
 }
 
-export function RecipeFinderTable({ recipes }) {
+export function RecipeFinderTable({ meals }) {
   const [filterHunger, setFilterHunger] = useState(50)
   const [filterBudget, setFilterBudget] = useState(50)
   const [filterHealth, setFilterHealthRating] = useState(3)
   // console.log('state Values', filterHunger, filterBudget, filterHealth)
   return (
     <>
-      <Typography variant="h1">What to cook?</Typography>
+      <Typography variant="h1">What to order?</Typography>
       <Filters
         hunger={filterHunger}
         budget={filterBudget}
@@ -123,7 +123,7 @@ export function RecipeFinderTable({ recipes }) {
         onHealthChange={setFilterHealthRating}
       />
       <RecipeTable
-        recipes={recipes}
+        meals={meals}
         hunger={filterHunger}
         budget={filterBudget}
         health={filterHealth}
@@ -133,23 +133,23 @@ export function RecipeFinderTable({ recipes }) {
 }
 
 export default function RecipeFinder() {
-  const [recipes, setRecipes] = useState([])
+  const [meals, setRecipes] = useState([])
 
   useEffect(() => {
     const fetchAllRecipes = async () => {
-      const res = await fetch('api/recipes', {
+      const res = await fetch('api/meals', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      const { recipes } = await res.json()
-      setRecipes(recipes)
+      const { meals } = await res.json()
+      setRecipes(meals)
     }
     fetchAllRecipes()
   }, [])
 
-  return <RecipeFinderTable recipes={recipes} />
+  return <RecipeFinderTable meals={meals} />
 }
 
 function calculateSliderScore(recipeValue, userValue) {
@@ -159,7 +159,7 @@ function calculateSliderScore(recipeValue, userValue) {
 }
 
 function calculateRatingScore(recipeValue, userValue) {
-  // never show a recipe with a health rating difference of 3 or more
+  // never show a meal with a health rating difference of 3 or more
   const difference = Math.abs(recipeValue - userValue);
   if (difference >= 3) {
     return 1000;
